@@ -1,0 +1,29 @@
+// Scroll Button Customization Setting
+add_action('customize_register', 'bstt_scroll_btn_customize');
+function bstt_scroll_btn_customize($wp_customize){
+     $wp_customize -> add_section('bstt_scroll_btn_section', array(
+          'title' => __('Scroll to Top Button', 'bstt'),
+          'desciption' => __('Change button background color, icon color and icon', 'bstt'),
+     ));
+     // Background Color
+     $wp_customize -> add_setting('bstt_btn_default_bg_color', array(
+          'default' => '#0073e6',
+     ));
+     $wp_customize -> add_control('bstt_btn_default_bg_color', array(
+          'label' => __('Background Color', 'bstt'),
+          'section' => 'bstt_scroll_btn_section',
+          'setting' => 'bstt_btn_default_bg_color',
+          'type' => 'color',
+     ));
+    }
+    // Scroll Button Background color CSS
+function bstt_scroll_btn_bg_color(){
+    ?>
+    <style>
+         #back-to-top{
+              background-color: <?php print get_theme_mod('bstt_btn_default_bg_color'); ?>;
+         }
+    </style>
+    <?php
+}
+add_action('wp_head', 'bstt_scroll_btn_bg_color');
